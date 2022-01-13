@@ -1,2 +1,2 @@
 # voice_codec
-Voice Coder/Decoder based ETSI GSM 06.10
+Voice Coder/Decoder based on ETSI GSM 06.10
