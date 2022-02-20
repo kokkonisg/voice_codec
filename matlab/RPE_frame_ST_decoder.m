@@ -1,4 +1,4 @@
-function [S] = RPE_frame_ST_decoder(LARc, d)
+function S = RPE_frame_ST_decoder(LARc, d)
     %Polynommial stuff
     a = rc2poly(LARinv(LARdequant(LARc)));
     

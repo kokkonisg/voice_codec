@@ -11,7 +11,7 @@ function [LARc, d] = RPE_frame_ST_coder(S)
     
     %Polynommial stuff
     a = rc2poly(LARinv(LARdequant(LARc)));
-    disp(a);
+    
     
     %Residual 
     d = Residual(S, a);
