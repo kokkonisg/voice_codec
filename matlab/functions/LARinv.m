@@ -8,5 +8,8 @@ function r = LARinv(LAR)
         else
            r(i)=sign(LAR(i))*(0.125*abs(LAR(i))+0.796875);
        end
-   end
+    end
+%     for i=1:length(LAR)
+%         r(i)=(10^LAR(i)-1)/(10^LAR(i)+1);
+%     end
 end

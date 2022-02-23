@@ -11,5 +11,6 @@ function LARc = LARquant(LAR)
         elseif LARc(i) > maxLAR(i)
             LARc(i) = maxLAR(i);
         end
+        LARc(i)=LARc(i)-minLAR(i);
     end
 end

@@ -1,4 +1,6 @@
 function [LARc, d] = RPE_frame_ST_coder(S)
+    S = preprocessing(S);
+
     %%Short Term
     %reflection coefficients
     r = ACF(S);

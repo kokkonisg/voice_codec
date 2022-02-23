@@ -1,46 +1,22 @@
-function r = ACF(s)
-    ACF=zeros(1,9);
-    r=ACF;
-    P=r;
-    K=P;
+function r = ACF(s)    
     %compute ACF
-    for k=1:9
-        r(k) = sum(s(k:end).*s(1:end-k+1));
-    end
+    [ACF, ~] = xcorr(s, 8);
+    rs = ACF(9:end);
     
-    if ACF(1)==0
-        r = zeros(1, 8);
-        return;
-    end
+    r = schurrc(rs);
     
-    %initialize K, P
-    for i=2:8
-        K(10-i)=ACF(i);
-    end
-    for j=1:9
-        P(j)=ACF(j);
-    end
-    
-    %compute r
-    for n=2:9
-        if P(1) < abs(P(2))
-            r = [r(1:n-1) zeros(1,9-n+1)];
-            break;
-        end
-        r(n)=abs(P(2))/P(1);
-        if P(2) > 0
-            r(n)=-r(n);
-        end
-        if n == 9
-            break;
-        end
-
-        %Schur recursion
-        P(1) = P(1) + P(2)*r(n);
-        for m=2:9-n
-            P(m)=P(1+m) + r(n)*K(9-m);
-            K(9-m) = K(9-m) + r(n)*P(1+m);
-        end
-    end
-    r=r(2:end);
+%     R(1,:) = [rs(1), rs(2), rs(3), rs(4), rs(5), rs(6), rs(7), rs(8)];
+%     for i=2:8
+%         R(i,:) = R(i-1,:);
+%         R(i,[i-1 i])=R(i,[i i-1]);
+%     end
+%     w = rs(2:9)'\R
+%     r=poly2rc([1 -w]);
+%     for i=1:length(r)
+%         if r(i) < -1
+%             r(i) = -1;
+%         elseif r(i) > 1
+%             r(i) = 1;
+%         end
+%     end
 end
