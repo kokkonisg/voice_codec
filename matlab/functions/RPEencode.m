@@ -1,4 +1,4 @@
-function [Mc, Xmaxc, xc] = excitation_computation(e)
+function [Mc, Xmaxc, xc] = RPEencode(e)
     H = 2^13*[-134 -374 0 2054 5741 8192 5741 2054 0 -374 -134];
     x = zeros(1,40);
     xc = zeros(1,13);
@@ -20,9 +20,9 @@ function [Mc, Xmaxc, xc] = excitation_computation(e)
     Mc = M;
     
     Xmax = max(abs(xm(:,M)));
-    Xmaxq = (floor(Xmax/32)+1)*32-1;
+    [Xmaxq, Xmaxc] = APCM(Xmax,'e');
     x = xm(:,M)'./Xmaxq;
-    Xmaxc = floor(Xmaxq/32);
+    
     
     for i=1:13
         if x(i) < -0.75

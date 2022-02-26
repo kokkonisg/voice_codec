@@ -8,11 +8,12 @@ function d = Residual(S, a)
 %         end
 %     end
     
-    Shut = a' * S;
+    Shut(1:9,:) = ones(9,1)*S;
     for k=0:8
-        circshift(Shut(k+1), k);
+        Shut(k+1,:) = circshift(Shut(k+1,:), k);
         Shut(k+1, 1:k) = 0;
     end
-    d = sum(Shut);
-    
+    d = a*Shut;
+
+
 end

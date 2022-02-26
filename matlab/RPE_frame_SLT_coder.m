@@ -16,6 +16,6 @@ function [LARc,Nc,bc,CurrFrmExFull,CurrFrmSTResd] = RPE_frame_SLT_coder(s0, Prev
         CurrFrmExFull = [CurrFrmExFull LongTerm_Prediction(d(40*j+1:40*j+40), PrevFrmSTResd, bc(j+1), Nc(j+1))];
         CurrFrmSTResd = [CurrFrmSTResd synthesis(CurrFrmExFull(40*j+1:40*j+40), bc(j+1), Nc(j+1), PrevFrmSTResd)];
         
-        PrevFrmSTResd = [PrevFrmSTResd(40*j+1:end) CurrFrmSTResd];
+        PrevFrmSTResd = [PrevFrmSTResd(40*(j+1)+1:end) CurrFrmSTResd];
     end
 end

@@ -9,6 +9,7 @@ function LAR = LARtrans(r)
            LAR(i)=sign(r(i))*(8*abs(r(i))-6.375);
        end
    end
+   LAR = rand(1,8);
 %    for i=1:length(LAR)
 %        LAR(i) = log10((1+r(i))/(1-r(i)));
 %    end

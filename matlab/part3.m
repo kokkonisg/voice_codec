@@ -6,20 +6,25 @@ Nc = zeros(1,4);
 bc = Nc;
 e = zeros(1,160);
 drc = zeros(1, 320);
-block = zeros(1,260);
+block = zeros(200,260);
 
 for i=1:160:length(s0)-159
-    [LARc, Nc, bc, e, drc(160:320)] = ...
-        RPE_frame_SLT_coder(s0(i:i+159), drc(1:160));
-    [Mc, Xmaxc, xc] = excitation_computation(e);
-    block((i-1)/160+1,:) = binblock(LARc, Nc, bc, Mc, Xmaxc, xc);
+    [LARc, Nc, bc, e, drc(161:320)] = RPE_frame_SLT_coder(s0(i:i+159), drc(1:160));
+    for j=0:3
+        [Mc(j+1), Xmaxc(j+1), xc(j+1,:)] = RPEencode(e(40*j+1:40*j+40));
+    end
+    block((i-1)/160+1,:) = params2bin(LARc, Nc, bc, Mc, Xmaxc, xc);
+    drc(1:160)=drc(161:320);
 end
 
+drc = zeros(1, 320);
 for i=1:160:length(s0)-159
-    n=floor(i/20)+1; %index for LAR values (8 LARs per 160-sample frame)
-    m=round(n/2); %index for N, b values (4 of each per 160-sample frame)
-    [s(i:i+159), drc(i+160:i+319)] = RPE_frame_SLT_decoder...
-        (LARc(n:n+7), Nc(m:m+3), bc(m:m+3), e(i:i+159), drc(i:i+159));
+    [LARc, Nc, bc, Mc, Xmaxc, xc] = bin2params(block((i-1)/160+1,:));
+    for j=0:3
+        e(40*j+1:40*j+40) = RPEdecode(Mc(j+1), Xmaxc(j+1), xc(j+1));
+    end
+    [s(i:i+159), drc(161:320)] = RPE_frame_SLT_decoder(LARc, Nc, bc, e, drc(1:160));
+    drc(1:160)=drc(161:320);
 end
 
 sound(s, 8000);

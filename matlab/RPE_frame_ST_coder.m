@@ -15,6 +15,6 @@ function [LARc, d] = RPE_frame_ST_coder(S)
     a = rc2poly(LARinv(LARdequant(LARc)));
     
     
-    %Residual 
+    %Residual
     d = Residual(S, a);
 end
