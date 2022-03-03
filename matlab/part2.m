@@ -28,13 +28,13 @@ for i=1:160:length(s0)-159
         (LARc(n:n+7), Nc(m:m+3), bc(m:m+3), e(i:i+159), drc(i:i+159));
 end
 
-x=1:length(s);
-subplot(3,1,1);
-plot(x,s);
-subplot(3,1,2);
-plot(x,s-s0','r')
-subplot(3,1,3);
-plot(x,s,x,s-s0','r');
+% x=1:length(s);
+% subplot(3,1,1);
+% plot(x,s);
+% subplot(3,1,2);
+% plot(x,s-s0','r')
+% subplot(3,1,3);
+% plot(x,s,x,s-s0','r');
 
 sound(s, 8000);
 audiowrite("coded.wav",s,8000);

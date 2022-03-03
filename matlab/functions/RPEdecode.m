@@ -3,7 +3,7 @@ function e = RPEdecode(Mc, Xmaxc, xc)
     %decoding values
     xm = qlb(xc+1);
     Xmax = APCM(Xmaxc,'d');
-    M=Mc+1;
+    M=Mc;
     
     x = xm*Xmax;
     e = zeros(1,40);

@@ -1,5 +1,5 @@
 function [Mc, Xmaxc, xc] = RPEencode(e)
-    H = 2^13*[-134 -374 0 2054 5741 8192 5741 2054 0 -374 -134];
+    H = [-134 -374 0 2054 5741 8192 5741 2054 0 -374 -134];
     x = zeros(1,40);
     xc = zeros(1,13);
     
@@ -21,7 +21,7 @@ function [Mc, Xmaxc, xc] = RPEencode(e)
     
     Xmax = max(abs(xm(:,M)));
     [Xmaxq, Xmaxc] = APCM(Xmax,'e');
-    x = xm(:,M)'./Xmaxq;
+    x = xm(:,M)'/Xmaxq;
     
     
     for i=1:13
