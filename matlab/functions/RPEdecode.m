@@ -5,7 +5,7 @@ function e = RPEdecode(Mc, Xmaxc, xc)
     Xmax = APCM(Xmaxc,'d');
     M=Mc;
     
-    x = xm*Xmax;
+    x = xm*Xmax*2^-15;
     e = zeros(1,40);
     if M==1
         e(M:3:end-1) = e(M:3:end-1) + x;
