@@ -1,4 +1,5 @@
 clear;
+addpath('utils','functions');
 [s0,] = audioread("male.wav");  %choose between male & female voice
 s0 = s0(1:480*160); %trim  audio clip to 10secs
 

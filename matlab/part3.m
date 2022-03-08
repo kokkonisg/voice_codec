@@ -1,6 +1,7 @@
 clear;
+addpath('utils','functions');
 [s0,] = audioread("male.wav");
-s0 = s0(1:120*160); %trim  audio clip to 10secs
+s0 = s0(1:120*160); %trim  audio clip to 2secs
 
 xc = zeros(4,13);
 Mc = zeros(1,4);
@@ -53,7 +54,7 @@ end
 % legend('Original','Difference', 'Location', 'best');
 
 sound(s, 8000);
-%audiowrite("coded3.wav",s,8000);
+audiowrite("coded3.wav",s,8000);
 
 
 
