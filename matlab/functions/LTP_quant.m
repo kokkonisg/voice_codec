@@ -1,4 +1,4 @@
-function [Nc, bc] = LTPparams_quant (N, b)
+function [Nc, bc] = LTP_quant (N, b)
     DLB = [0.2 0.5 0.8];
 
     Nc = N;

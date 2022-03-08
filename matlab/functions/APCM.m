@@ -12,7 +12,7 @@ function [xmaxq, xmaxc] = APCM(xmax, mode)
         xmaxq = qlb(end);
         xmaxc = length(qlb)-1;
     elseif mode=="d"
-        xmaxq = qlb(xmax+1);
+        xmaxq = qlb(xmax+1); %here (in decode mode) xmax is actually already encoded
     else
         disp("Choose mode: e for encode or d for decoce");
     end

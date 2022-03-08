@@ -3,7 +3,7 @@ function [LARc, d] = RPE_frame_ST_coder(S)
 
     %%Short Term
     %reflection coefficients
-    r = ACF(S);
+    r = ComputeRC(S);
     
     %Log.-Area Ratios transformation
     LAR = LARtrans(r);

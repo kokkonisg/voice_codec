@@ -1,8 +1,9 @@
 function [Mc, Xmaxc, xc] = RPEencode(e)
-    H = [-134 -374 0 2054 5741 8192 5741 2054 0 -374 -134];
+    H = 2^(-13)*[-134 -374 0 2054 5741 8192 5741 2054 0 -374 -134];
     x = zeros(1,40);
     xc = zeros(1,13);
     
+    %undersampling e
     for k=1:40
         for i=1:11
             if k+5-i > 0 && k+5-i < 41
@@ -11,17 +12,20 @@ function [Mc, Xmaxc, xc] = RPEencode(e)
         end
     end
     
+    %deviding into subsequences
     xm(:,1) = x(1:3:end-1);
     for m=2:4
         xm(:,m) = x(m:3:end);
     end
     
+    %calculate best M
     [~, M] = max(sum(xm.^2));
     Mc = M;
     
+    %calculate & code/decode Xmax, x
     Xmax = max(abs(xm(:,M)));
-    [Xmaxq, Xmaxc] = APCM(Xmax,'e');
-    x = xm(:,M)'/Xmaxq;
+    [Xmaxq, Xmaxc] = APCM(Xmax*2^15,'e');
+    x = xm(:,M)'/(Xmaxq*2^(-15));
     
     
     for i=1:13
@@ -39,7 +43,7 @@ function [Mc, Xmaxc, xc] = RPEencode(e)
             xc(i)=5;
         elseif x(i) < 0.75
             xc(i)=6;
-        elseif x(i) < 1
+        else
             xc(i)=7;
         end
     end

@@ -1,6 +1,7 @@
-function e = Prediction (d, ds, bc, Nc)
-    e = zeros(1,length(ds));
-    for n=1:length(ds)
-        e(n) = d(n) - bc*ds(n-Nc);
+function e = Prediction (d, dprev, b, N)
+    %dprev are the recreated values of d
+    e = zeros(1,length(dprev));
+    for n=1:length(dprev)
+        e(n) = d(n) - b*dprev(n-N);
     end
 end
